@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+
+  projecsUsers    ProjectUser[]
+  clientsUsers    ClientUser[]
+
+  @@map("users")
+}
+
+model Project {
+  id               Int        @id @default(autoincrement())
+  title            String 
+  resume           String
+  importantInfos   String
+  startDate        DateTime
+  limitDate        DateTime
+  client           Client     @relation(fields: [clientId], references: [id])
+  clientId         Int
+
+  projectsUsers    ProjectUser[]
+  briefings        Briefing[]
+
+  @@map("projects")
+}
+
+model ProjectUser {
+  id              Int        @id @default(autoincrement())
+  user            User       @relation(fields: [userId], references: [id])
+  userId          Int
+  project         Project    @relation(fields: [projectId], references: [id])
+  projectId       Int
+
+  @@map("projectsUsers")
+}
+
+model Client {
+  id            Int    @id @default(autoincrement())
+  name          String
+  email       String 
+  phone       String 
+  
+  projects      Project[]
+  clientsUsers  ClientUser[]
+
+  @@map("clients")
+}
+
+model ClientUser {
+  id          Int    @id @default(autoincrement())
+  user        User   @relation(fields: [userId], references: [id])
+  userId      Int
+  client      Client @relation(fields: [clientId], references: [id])
+  clientId    Int
+
+  @@map("clientsUsers")
+}
+
+model Briefing {
+  id       Int    @id @default(autoincrement())
+  project  Project  @relation(fields: [projectId], references: [id])
+  projectId Int
+  question  String
+  answer    String
+
+  @@map("briefings")
+}
