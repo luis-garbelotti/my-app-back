@@ -12,9 +12,9 @@ async function signUp(req: Request, res: Response) {
 async function signIn(req: Request, res: Response) {
   const user = req.body;
 
-  const token = await userService.signIn(user);
+  const userBody = await userService.signIn(user);
 
-  res.send({ token });
+  res.send( userBody );
 }
 
 export default {

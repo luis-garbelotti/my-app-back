@@ -27,7 +27,9 @@ async function signIn(loginData: LoginUserData) {
 
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
 
-  return token;
+  delete user.password;
+
+  return {...user, token};
 }
 
 async function getUserOrFail(loginData: LoginUserData) {
