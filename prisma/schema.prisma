@@ -27,8 +27,8 @@ model Project {
   title            String 
   resume           String
   importantInfos   String
-  startDate        DateTime
-  limitDate        DateTime
+  startDate        String
+  limitDate        String
   client           Client     @relation(fields: [clientId], references: [id])
   clientId         Int
 
