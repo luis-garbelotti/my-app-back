@@ -9,5 +9,5 @@ export function hashData(data: string): string {
 export function compareHashData(data: string, dataHashed: string): boolean {
   const dataCompared = bcrypt.compareSync(data, dataHashed);
 
-  return dataCompared
+  return dataCompared;
 }

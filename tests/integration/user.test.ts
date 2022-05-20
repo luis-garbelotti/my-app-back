@@ -1,8 +1,8 @@
-import app from "../../src/app.js";
+import app from '../../src/app.js';
 import supertest from 'supertest';
-import { userBodyFactory } from "../factories/userBodyFactory.js";
-import { userFactory } from "../factories/userFactory.js";
-import { prisma } from "../../src/database.js";
+import { userBodyFactory } from '../factories/userBodyFactory.js';
+import { userFactory } from '../factories/userFactory.js';
+import { prisma } from '../../src/database.js';
 
 async function truncateUsers() {
   await prisma.$executeRaw`TRUNCATE TABLE users CASCADE`;
@@ -24,7 +24,7 @@ describe('POST /signup', () => {
       where: {
         email: user.email
       }
-    })
+    });
 
     expect(createdUser.status).toEqual(201);
     expect(selectCreatedUser.email).toEqual(user.email);
@@ -35,31 +35,31 @@ describe('POST /signup', () => {
     const userWithoutName = {
       ...user,
       name: ''
-    }
+    };
 
     const response = await supertest(app).post('/signup').send(userWithoutName);
 
     expect(response.status).toEqual(422);
   });
-  
+
   it('should return status 422 given invalid user schema (email)', async () => {
     const user = userBodyFactory();
     const userWithoutEmail = {
       ...user,
       email: ''
-    }
+    };
 
     const response = await supertest(app).post('/signup').send(userWithoutEmail);
 
     expect(response.status).toEqual(422);
   });
-  
+
   it('should return status 422 given invalid user schema (password)', async () => {
     const user = userBodyFactory();
     const userWithoutPassword = {
       ...user,
       password: ''
-    }
+    };
 
     const response = await supertest(app).post('/signup').send(userWithoutPassword);
 
@@ -70,12 +70,12 @@ describe('POST /signup', () => {
 describe('POST /signin', () => {
   beforeEach(truncateUsers);
   afterAll(disconnect);
-  
+
   it('should return status 200 given valid credentials', async () => {
     const user = userBodyFactory();
     await userFactory(user);
 
-    const loginResponse = await supertest(app).post('/signin').send({email: user.email, password: user.password});
+    const loginResponse = await supertest(app).post('/signin').send({ email: user.email, password: user.password });
 
     expect(loginResponse.status).toEqual(200);
   });
@@ -88,7 +88,7 @@ describe('POST /signin', () => {
 
     expect(loginResponse.status).toEqual(422);
   });
-  
+
   it('should return status 422 given invalid login user schemas (password)', async () => {
     const user = userBodyFactory();
     await userFactory(user);
@@ -97,5 +97,5 @@ describe('POST /signin', () => {
 
     expect(loginResponse.status).toEqual(422);
   });
-  
+
 });

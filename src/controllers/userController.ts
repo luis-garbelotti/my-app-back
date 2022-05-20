@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import userService from "../services/userService.js";
+import { Request, Response } from 'express';
+import userService from '../services/userService.js';
 
 async function signUp(req: Request, res: Response) {
   const user = req.body;
@@ -14,7 +14,7 @@ async function signIn(req: Request, res: Response) {
 
   const userBody = await userService.signIn(user);
 
-  res.send( userBody );
+  res.send(userBody);
 }
 
 export default {
