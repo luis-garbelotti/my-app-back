@@ -18,4 +18,4 @@ async function insert(createUser: CreateUserData) {
 export default {
   findByEmail,
   insert
-}
+};
