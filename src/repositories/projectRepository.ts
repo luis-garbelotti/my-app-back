@@ -37,9 +37,21 @@ async function findMany(userId: number) {
   });
 }
 
+async function find(projectId: number) {
+  return prisma.project.findFirst({
+    where: {
+      id: projectId
+    },
+    include: {
+      client: true
+    }
+  });
+}
+
 export default {
   create,
   findCreatedProject,
   createRelation,
-  findMany
+  findMany,
+  find,
 };

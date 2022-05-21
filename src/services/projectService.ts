@@ -30,7 +30,18 @@ async function findMany(userId: number) {
   return projects;
 }
 
+async function find(projectId: number) {
+  const project = await projectRepository.find(projectId);
+
+  if (!project) {
+    throw notFoundError('Project not found');
+  }
+
+  return project;
+}
+
 export default {
   create,
   findMany,
+  find,
 };

@@ -18,7 +18,16 @@ async function findMany(req: Request, res: Response) {
   res.send(projects).status(200);
 }
 
+async function find(req: Request, res: Response) {
+  const { projectId } = req.params;
+  
+  const projects = await projectService.find(parseInt(projectId));
+
+  res.send(projects).status(200);
+}
+
 export default {
   create,
-  findMany
+  findMany,
+  find
 };
