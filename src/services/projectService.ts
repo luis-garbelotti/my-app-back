@@ -20,6 +20,17 @@ async function createRelation(project: ProjectData, userId: number) {
   await projectRepository.createRelation(createdProject.id, userId); 
 }
 
+async function findMany(userId: number) {
+  const projects = await projectRepository.findMany(userId);
+
+  if(!projects) {
+    throw notFoundError('Project not found');
+  }
+
+  return projects;
+}
+
 export default {
   create,
+  findMany,
 };

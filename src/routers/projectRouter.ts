@@ -7,5 +7,6 @@ import projectSchema from '../schemas/projectSchema.js';
 const projectRouter = Router();
 
 projectRouter.post('/users/:userId/project', ensureAuthenticatedMiddleware, validateSchemaMiddleware(projectSchema), projectController.create);
+projectRouter.get('/users/:userId/projects', ensureAuthenticatedMiddleware, projectController.findMany);
 
 export default projectRouter;

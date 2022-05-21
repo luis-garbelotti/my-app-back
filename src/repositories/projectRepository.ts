@@ -26,8 +26,20 @@ async function createRelation(projectId: number, userId: number) {
   });
 }
 
+async function findMany(userId: number) {
+  return prisma.projectUser.findMany({
+    where: {
+      userId
+    },
+    include: {
+      project: true
+    }
+  });
+}
+
 export default {
   create,
   findCreatedProject,
   createRelation,
+  findMany
 };
