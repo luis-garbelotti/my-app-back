@@ -26,8 +26,20 @@ async function createRelation(clientId: number, userId: number) {
   });
 }
 
+async function findByUserId(id: number) {
+  return await prisma.clientUser.findMany({
+    where: {
+      userId: id
+    },
+    include: {
+      client: true
+    }
+  });
+}
+
 export default {
   create,
   findCreatedClient,
-  createRelation
+  createRelation,
+  findByUserId,
 };

@@ -10,6 +10,15 @@ async function create(req: Request, res: Response) {
   res.sendStatus(201);
 }
 
+async function findByUserId(req: Request, res: Response) {
+  const { userId } = req.params;
+
+  const clients = await clientService.findByUserId(parseInt(userId));
+  
+  res.send(clients).status(200);
+}
+
 export default {
   create,
+  findByUserId,
 };
