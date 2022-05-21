@@ -42,7 +42,15 @@ async function getUserOrFail(loginData: LoginUserData) {
   return user;
 }
 
+async function findById(id: number) {
+  const user = await userRepository.findById(id);
+  if (!user) throw notFoundError('User not found');
+
+  return user;
+}
+
 export default {
   signUp,
-  signIn
+  signIn,
+  findById,
 };

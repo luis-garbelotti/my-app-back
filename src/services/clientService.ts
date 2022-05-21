@@ -20,6 +20,11 @@ async function createRelation(client: ClientData, userId: number) {
   await clientRepository.createRelation(createdClient.id, userId); 
 }
 
+async function findByUserId(id: number) {
+  return await clientRepository.findByUserId(id);
+}
+
 export default {
   create,
+  findByUserId,
 };
