@@ -8,5 +8,6 @@ const projectRouter = Router();
 
 projectRouter.post('/users/:userId/project', ensureAuthenticatedMiddleware, validateSchemaMiddleware(projectSchema), projectController.create);
 projectRouter.get('/users/:userId/projects', ensureAuthenticatedMiddleware, projectController.findMany);
+projectRouter.get('/users/:userId/projects/:projectId', ensureAuthenticatedMiddleware, projectController.find);
 
 export default projectRouter;
