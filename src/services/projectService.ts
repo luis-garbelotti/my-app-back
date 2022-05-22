@@ -24,7 +24,7 @@ async function findMany(userId: number) {
   const projects = await projectRepository.findMany(userId);
 
   if(!projects) {
-    throw notFoundError('Project not found');
+    throw notFoundError('Project not found.');
   }
 
   return projects;
@@ -40,8 +40,13 @@ async function find(projectId: number) {
   return project;
 }
 
+async function updateDone(projectId: number) {
+  return await projectRepository.updateDone(projectId);
+}
+
 export default {
   create,
   findMany,
   find,
+  updateDone,
 };

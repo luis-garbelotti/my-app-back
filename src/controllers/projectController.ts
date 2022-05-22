@@ -26,8 +26,17 @@ async function find(req: Request, res: Response) {
   res.send(projects).status(200);
 }
 
+async function updateDone(req: Request, res: Response) {
+  const { projectId } = req.params;
+  
+  await projectService.updateDone(parseInt(projectId));
+
+  res.sendStatus(201);
+}
+
 export default {
   create,
   findMany,
-  find
+  find,
+  updateDone,
 };
