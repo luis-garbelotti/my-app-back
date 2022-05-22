@@ -31,6 +31,8 @@ model Project {
   limitDate        String
   client           Client     @relation(fields: [clientId], references: [id], onDelete: Cascade)
   clientId         Int
+  value            Int        @default(0)
+  isDone           Boolean    @default(false)
 
   projectsUsers    ProjectUser[]
   briefings        Briefing[]
