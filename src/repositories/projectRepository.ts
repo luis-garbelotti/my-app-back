@@ -48,10 +48,22 @@ async function find(projectId: number) {
   });
 }
 
+async function updateDone(projectId: number) {
+  return prisma.project.update({
+    where: {
+      id: projectId
+    },
+    data: {
+      isDone: true
+    }
+  });
+}
+
 export default {
   create,
   findCreatedProject,
   createRelation,
   findMany,
   find,
+  updateDone,
 };
