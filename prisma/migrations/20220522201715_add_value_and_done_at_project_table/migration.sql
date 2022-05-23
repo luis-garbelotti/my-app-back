@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "projects" ADD COLUMN     "isDone" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "value" INTEGER NOT NULL DEFAULT 0;
